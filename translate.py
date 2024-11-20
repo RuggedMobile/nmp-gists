@@ -1,5 +1,20 @@
+# Instructions for running:
+#
+# 1. Create a virtual environment
+#    `python3 -m venv venv`
+# 2. Activate the virtual environment
+#    `source venv/bin/activate`
+# 3. Install dependencies
+#    `pip install -U deep-translator openpyxl`
+# 4. Change the input and output file names as required and run the script
+#    `python3 translate.py`
+
 from deep_translator import GoogleTranslator
 from openpyxl import load_workbook
+
+
+input_file = "/mnt/c/Users/augh/Desktop/translations.xlsx"
+output_file = "/mnt/c/Users/augh/Desktop/translations_translated.xlsx"
 
 
 class EnglishTranslator:
@@ -16,7 +31,7 @@ translators = {
     "German": GoogleTranslator(source="en", target="de"),
 }
 
-workbook = load_workbook("/mnt/c/Users/augh/Desktop/translations.xlsx")
+workbook = load_workbook(input_file)
 worksheet = workbook.active
 
 source = "Default"
@@ -38,4 +53,4 @@ for row in worksheet.iter_rows(min_row=2):
 
     print(".", end="", flush=True)
 
-workbook.save("/mnt/c/Users/augh/Desktop/translations_translated.xlsx")
+workbook.save(output_file)
